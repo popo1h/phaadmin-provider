@@ -5,6 +5,7 @@ namespace Popo1h\PhaadminProvider\Action;
 use Popo1h\PhaadminCore\Action;
 use Popo1h\PhaadminCore\ActionAuth;
 use Popo1h\PhaadminCore\ActionAuth\AutoByActionActionAuth;
+use Popo1h\PhaadminCore\Request;
 use Popo1h\PhaadminCore\Response\JsonResponse;
 use Popo1h\PhaadminProvider\ActionAuthLoader;
 use Popo1h\PhaadminProvider\ActionLoader;
@@ -78,6 +79,7 @@ class ProviderInfoAction extends Action
         $actionMap = [];
         $actionAuthMap = [];
         $autoByActionActionAuthList = [];
+        $cateName = $this->request->getServerDataByName(Request::SERVER_NAME_CATE_NAME);
 
         foreach ($this->actionLoaders as $actionLoader) {
             $tempActionMap = $actionLoader->getActionMap();
@@ -123,7 +125,7 @@ class ProviderInfoAction extends Action
                     } else {
                         $accessAuthAutoByActionRes = $commentHelper->getCommentItemContents('access-auth-auto-by-action');
                         if (isset($accessAuthAutoByActionRes[0]) && trim($accessAuthAutoByActionRes[0]) == 'true') {
-                            $autoByActionActionAuth = new AutoByActionActionAuth($action);
+                            $autoByActionActionAuth = new AutoByActionActionAuth($action, $cateName);
                             $autoByActionActionAuthList[] = $autoByActionActionAuth;
                             $accessAuthName = $autoByActionActionAuth->getName();
                         } else {
