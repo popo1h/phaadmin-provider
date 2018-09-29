@@ -77,6 +77,12 @@ class ActionDocInfoAction extends Action
                     $docType = $docTypeRes[0];
                 }
 
+                $docConsume = 'application/x-www-form-urlencoded';
+                $docConsumeRes = $commentHelper->getCommentItemContents('doc-consume');
+                if (isset($docConsumeRes[0])) {
+                    $docConsume = $docConsumeRes[0];
+                }
+
                 $docParams = [];
                 $docParamRes = $commentHelper->getCommentItemContents('doc-param');
                 foreach ($docParamRes as $docParamResItem) {
@@ -164,6 +170,7 @@ class ActionDocInfoAction extends Action
                     'name' => $actionName,
                     'title' => $docTitle,
                     'type' => $docType,
+                    'consume' => $docConsume,
                     'params' => $docParams,
                     'return' => $returnData,
                     'tags' => $docTags,
