@@ -87,6 +87,7 @@ class PathActionLoader extends ActionLoader
                 return true;
             });
 
+            $this->actionMap = [];
             $actionExtLength = strlen($this->actionFileExt) + 1;
             foreach ($actionFiles as $relativeFilename => $fullFilename) {
                 $actionClass = $this->actionBaseNamespace . str_replace('/', '\\', substr($relativeFilename, 0, -$actionExtLength));

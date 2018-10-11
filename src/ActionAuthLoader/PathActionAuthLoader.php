@@ -87,6 +87,7 @@ class PathActionAuthLoader extends ActionAuthLoader
                 return true;
             });
 
+            $this->actionAuthMap = [];
             $actionAuthExtLength = strlen($this->actionAuthFileExt) + 1;
             foreach ($actionAuthFiles as $relativeFilename => $fullFilename) {
                 $actionAuthClass = $this->actionAuthBaseNamespace . str_replace('/', '\\', substr($relativeFilename, 0, -$actionAuthExtLength));
